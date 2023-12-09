@@ -5,20 +5,23 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { userReducer } from "./redux/reducer/reducer";
-import { combineReducers, configureStore} from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+import { spinnerReducer } from "./redux/reducer/spinner";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 let rootReducer = combineReducers({
   userReducer,
+  spinnerReducer,
 });
 // let store = createStore(rootReducer);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
- composeEnhancers(applyMiddleware(thunk))
+  // spinnerReducer,
+  composeEnhancers(applyMiddleware(thunk))
 );
 // let store = configureStore({
 //   reducer: {

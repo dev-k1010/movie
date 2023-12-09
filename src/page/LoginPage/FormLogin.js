@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { SET_INFO } from "../../redux/constant/user";
 import { useNavigate } from "react-router-dom";
 import { loginAction } from "../../redux/action/user";
+import { TURN_OFF } from "../../redux/constant/spinner";
 const FormLogin = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -19,16 +20,22 @@ const FormLogin = () => {
         // console.log(res);
         message.success("Đăng nhập thành công");
         dispatch({
-          type: SET_INFO,
+          type: SET_INFO, 
           //   Lấy data từ Api về
           payload: res.data.content,
         });
+        dispatch({
+          type: TURN_OFF
+        })
         // Chuyển trang khi đăng nhập thành công
         // đẩy thông tin lên redux
       })
       .catch((err) => {
         // console.log(err);
         message.error("Đăng nhập thất bại");
+        dispatch({
+          type: TURN_OFF
+        })
       });
     console.log("Success:", values);
   };
